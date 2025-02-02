@@ -7,37 +7,28 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import fi.haagahelia.course.domain.Student;
-import fi.haagahelia.course.domain.StudentRepository;
+import fi.haagahelia.course.domain.Book;
+import fi.haagahelia.course.domain.BookRepository;
 
 @SpringBootApplication
 public class StudentListApplication {
-	
-	private static final Logger log = LoggerFactory.getLogger(StudentListApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(StudentListApplication.class);
 
-	public static void main(String[] args) {
-		SpringApplication.run(StudentListApplication.class, args);
-	}
- 
-	@Bean
-	public CommandLineRunner studentDemo(StudentRepository repository) {
-		return (args) -> {
-			log.info("save a couple of students");
-			repository.save(new Student("Aku", "Johnson", "john@john.com"));
-			repository.save(new Student("Ankka", "Kateson", "kate@kate.com"));	
-			
-			repository.save(new Student("Musta", "Naamio", "mm@bengali.org"));
-			
-			log.info("fetch all students");
-			for (Student student : repository.findAll()) {
-				log.info(student.toString());
-			}
-			log.info("haetaan kaikki Naamiot");
-			for (Student student : repository.findByLastName("Naamio")) {
-				log.info(student.toString());
-			}
+    public static void main(String[] args) {
+        SpringApplication.run(StudentListApplication.class, args);
+    }
 
-		};
-	}
-	
+    @Bean
+    public CommandLineRunner bookDemo(BookRepository repository) {
+        return (args) -> {
+            log.info("save a couple of books");
+            repository.save(new Book("Book Title 1", "Author 1", 2021));
+            repository.save(new Book("Book Title 2", "Author 2", 2022));
+
+            log.info("fetch all books");
+            for (Book book : repository.findAll()) {
+                log.info(book.toString());
+            }
+        };
+    }
 }

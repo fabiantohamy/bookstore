@@ -1,6 +1,5 @@
 package fi.haagahelia.course.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +14,6 @@ public class StudentController {
 	
 	private StudentRepository repository; 
     
-    // constructor injection - works only if only one constructor
     public StudentController(StudentRepository repository) {
         this.repository = repository;
     }
