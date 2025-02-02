@@ -8,14 +8,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import fi.haagahelia.course.domain.Student;
 import fi.haagahelia.course.domain.StudentRepository;
+import fi.haagahelia.course.domain.BookRepository;
 
 @Controller
 public class BookController {
 	
-	private StudentRepository repository; 
+	private BookRepository repository; 
     
-    public BookController(StudentRepository repository) {
+    public BookController(BookRepository repository) {
         this.repository = repository;
+    }
+    @RequestMapping("/booklist")
+    public String bookList(Model model) {
+        model.addAttribute("books", repository.findAll());
+        return "booklist";
     }
 	
     @RequestMapping(value= {"/", "/studentlist"})
@@ -28,13 +34,7 @@ public class BookController {
     public String addStudent(Model model){
     	model.addAttribute("student", new Student());
         return "addstudent";
-    }     
-    
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(Student student){
-        repository.save(student);
-        return "redirect:studentlist";
-    }    
+    }       
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteStudent(@PathVariable("id") Long studentId, Model model) {

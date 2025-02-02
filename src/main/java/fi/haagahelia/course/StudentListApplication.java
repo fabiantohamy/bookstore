@@ -22,8 +22,8 @@ public class StudentListApplication {
     public CommandLineRunner bookDemo(BookRepository repository) {
         return (args) -> {
             log.info("save a couple of books");
-            repository.save(new Book("Book Title 1", "Author 1", 2021));
-            repository.save(new Book("Book Title 2", "Author 2", 2022));
+            repository.save(new Book("A Farewell to Arms", "Ernest Hemingway", "1232323-21", 1929));
+            repository.save(new Book("Animal Farm", "George Orwell", "221234-5", 1945));
 
             log.info("fetch all books");
             for (Book book : repository.findAll()) {
