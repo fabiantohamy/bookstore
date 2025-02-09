@@ -7,6 +7,7 @@
 <body>
     <h1>Edit Book</h1>
     <form action="#" th:action="@{/editbook}" th:object="${book}" method="post">
+        <input type="hidden" th:field="*{id}" />
         <p>Title: <input type="text" th:field="*{title}" /></p>
         <p>Author: <input type="text" th:field="*{author}" /></p>
         <p>ISBN: <input type="text" th:field="*{isbn}" /></p>
