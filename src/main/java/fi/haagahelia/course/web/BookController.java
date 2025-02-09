@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import fi.haagahelia.course.domain.Student;
-import fi.haagahelia.course.domain.CategoryRepository;
 import fi.haagahelia.course.domain.Book;
 import fi.haagahelia.course.domain.BookRepository;
+import fi.haagahelia.course.domain.CategoryRepository;
 
 @Controller
 public class BookController {
@@ -29,6 +28,7 @@ public class BookController {
     @RequestMapping(value = "/addbook", method = RequestMethod.GET)
     public String addBookForm(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "addbook";
     }
 
@@ -42,12 +42,6 @@ public class BookController {
     public String deleteBook(@PathVariable("id") Long bookId) {
         repository.deleteById(bookId);
         return "redirect:/booklist";
-    }
-	
-    @RequestMapping(value= {"/", "/studentlist"})
-    public String studentList(Model model) {	
-        model.addAttribute("students", repository.findAll());
-        return "studentlist";
     }
 
     @RequestMapping(value = "/editbook/{id}", method = RequestMethod.GET)
