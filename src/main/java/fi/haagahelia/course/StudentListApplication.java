@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import fi.haagahelia.course.domain.Book;
 import fi.haagahelia.course.domain.BookRepository;
+import fi.haagahelia.course.domain.Category;
+import fi.haagahelia.course.domain.CategoryRepository;
 
 @SpringBootApplication
 public class StudentListApplication {
@@ -19,16 +21,12 @@ public class StudentListApplication {
     }
 
     @Bean
-    public CommandLineRunner bookDemo(BookRepository repository) {
+    public CommandLineRunner demo(CategoryRepository categoryRepository) {
         return (args) -> {
-            log.info("save a couple of books");
-            repository.save(new Book("A Farewell to Arms", "Ernest Hemingway", "1232323-21", 1929));
-            repository.save(new Book("Animal Farm", "George Orwell", "221234-5", 1945));
-
-            log.info("fetch all books");
-            for (Book book : repository.findAll()) {
-                log.info(book.toString());
-            }
+            categoryRepository.save(new Category("Fiction"));
+            categoryRepository.save(new Category("Non-Fiction"));
+            categoryRepository.save(new Category("Science"));
+            categoryRepository.save(new Category("Fantasy"));
         };
     }
 }

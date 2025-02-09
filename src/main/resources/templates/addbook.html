@@ -11,6 +11,12 @@
         <p>Author: <input type="text" th:field="*{author}" /></p>
         <p>ISBN: <input type="text" th:field="*{isbn}" /></p>
         <p>Year: <input type="number" th:field="*{publicationYear}" /></p>
+        <p>
+            Category:
+            <select th:field="*{category}">
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+            </select>
+        </p>
         <p><input type="submit" value="Add Book" /></p>
     </form>
     <a th:href="@{/booklist}">Back to Book List</a>
