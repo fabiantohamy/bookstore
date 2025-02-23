@@ -6,10 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import fi.haagahelia.course.domain.Book;
 import fi.haagahelia.course.domain.BookRepository;
 import fi.haagahelia.course.domain.CategoryRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class BookController {
@@ -56,5 +60,15 @@ public class BookController {
     public String editBook(Book book) {
         repository.save(book);
         return "redirect:/booklist";
+    }
+
+    @RequestMapping(value = "/books", method = RequestMethod.GET)
+    public @ResponseBody List<Book> bookListRest() {
+        return (List<Book>) repository.findAll();
+    }
+
+    @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
+    public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId) {
+        return repository.findById(bookId);
     }
 }
