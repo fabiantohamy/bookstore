@@ -15,11 +15,11 @@ import fi.haagahelia.course.domain.Category;
 import fi.haagahelia.course.domain.CategoryRepository;
 
 @SpringBootApplication
-public class StudentListApplication {
-    private static final Logger log = LoggerFactory.getLogger(StudentListApplication.class);
+public class BookstoreApplication {
+    private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(StudentListApplication.class, args);
+        SpringApplication.run(BookstoreApplication.class, args);
     }
 
     @Bean
